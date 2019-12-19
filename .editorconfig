@@ -1,0 +1,230 @@
+# EditorConfig is awesome:http://EditorConfig.org
+
+# Special property that should be specified at the top of the file outside of any sections. Set to "true" to stop .editorconfig files search on current file.
+root = true
+
+[*]
+indent_style = space
+charset = utf-8
+end_of_line = crlf
+trim_trailing_whitespace = true
+insert_final_newline = false
+
+[*.{cs,csx,vb,vbx}]
+indent_size = 4
+
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
+indent_size = 2
+
+[*.{props,targets,ruleset,config,nuspec,resx,vsixmanifest,vsct}]
+indent_size = 2
+
+[*.json]
+indent_size = 2
+
+[*.cs]
+# Prefer to place 'System' directives first when sorting usings.
+dotnet_sort_system_directives_first = true
+# Prefer null coalescing expression to ternary operator checking (e.g. 'var v = x ?? y;').
+dotnet_style_coalesce_expression = true:warning
+# Prefer collections to be initialized using collection initializers when possible (e.g., 'var list = new List<int>{ 1, 2, 3 };').
+dotnet_style_collection_initializer = true:warning
+# Prefer tuple names to ItemX properties (e.g., '(string name, int age) customer = GetCustomer(); var name = customer.name;').
+dotnet_style_explicit_tuple_names = true:warning
+# Prefer to use null-conditional operator where possible (e.g., 'var v = o?.ToString();').
+dotnet_style_null_propagation = true:warning
+# Prefer objects to be initialized using object initializers when possible (e.g., 'var c = new Customer(){ Age = 21 };').
+dotnet_style_object_initializer = true:warning
+# For locals, parameters and type members, prefer types that have a language keyword to represent them (int, double, string, etc.) to use that keyword instead of the type name (Int32, Int64, etc.).
+dotnet_style_predefined_type_for_locals_parameters_members = true:warning
+# Prefer the keyword whenever a member-access expression is used on a type with a keyword representation (int, double, string, etc.).
+dotnet_style_predefined_type_for_member_access = true:warning
+# Prefer all non-static events referenced from within non-static methods to be prefaced with 'this.' in C# and 'Me.' in Visual Basic.
+dotnet_style_qualification_for_event = false:warning
+# Prefer all non-static fields used in non-static methods to be prefaced with 'this.' in C# or 'Me.' in Visual Basic.
+dotnet_style_qualification_for_field = false:warning
+# Prefer all non-static methods called from within non-static methods to be prefaced with 'this.' in C# and 'Me.' in Visual Basic.
+dotnet_style_qualification_for_method = false:warning
+# Prefer the all non-static properties used in non-static methods to be prefaced with 'this.' in C# or 'Me.' in Visual Basic.
+dotnet_style_qualification_for_property = false:warning
+# Prefer to use conditional coalescing operation (?.) when invoking a lambda instead of performing a null check (e.g., 'func?.Invoke(args);').
+csharp_style_conditional_delegate_call = true:warning
+# Prefer expression-bodied members for accessors (e.g., 'public int Age { get => _age; set => _age = value; }').
+csharp_style_expression_bodied_accessors = true:none
+# Prefer expression-bodied members for constructors (e.g., 'public Customer(int age) => Age = age;').
+csharp_style_expression_bodied_constructors = false:none
+# Prefer expression-bodied members for indexers (e.g., 'public T this[int i] => _value[i];').
+csharp_style_expression_bodied_indexers = true:none
+# Prefer expression-bodied members for methods (e.g., 'public int GetAge() => this.Age;').
+csharp_style_expression_bodied_methods = false:none
+# Prefer expression-bodied members for operators.
+csharp_style_expression_bodied_operators = false:none
+# Prefer expression-bodied members for properties (e.g., 'public int Age => _age;').
+csharp_style_expression_bodied_properties = true:none
+# Prefer 'out' variables to be declared inline when possible (e.g., 'if (int.TryParse(value out int i) {...}').
+csharp_style_inlined_variable_declaration = true:warning
+# Prefer pattern matching instead of 'as' expressions with null-checks to determine if something is of a particular type (e.g., 'if (o is string s) {...}').
+csharp_style_pattern_matching_over_as_with_null_check = true:warning
+# Prefer pattern matching instead of 'is' expressions with type casts (e.g., 'if (o is int i) {...}').
+csharp_style_pattern_matching_over_is_with_cast_check = true:warning
+# Prefer to use 'throw' expressions instead of 'throw' statements.
+csharp_style_throw_expression = true:warning
+# Prefer 'var' in all cases unless overridden by another code style rule.
+csharp_style_var_elsewhere = true:warning
+# Prefer 'var' is used for built-in system types such as 'int'.
+csharp_style_var_for_built_in_types = true:warning
+# Prefer 'var' when the type is already mentioned on the right-hand side of a declaration expression.
+csharp_style_var_when_type_is_apparent = true:warning
+# Place catch on new line.
+csharp_new_line_before_catch = true
+# Place else on new line.
+csharp_new_line_before_else = true
+# Place finally on new line.
+csharp_new_line_before_finally = true
+# Place members in anonymous types on new line.
+csharp_new_line_before_members_in_anonymous_types = true
+# Place members in object initializers on new line.
+csharp_new_line_before_members_in_object_initializers = true
+# Place new line before open brace
+csharp_new_line_before_open_brace = none
+# Place query expression clauses on new line.
+csharp_new_line_between_query_expression_clauses = false
+
+csharp_indent_block_contents = true
+
+csharp_indent_braces = false
+
+csharp_indent_case_contents = true
+
+csharp_indent_labels = flush_left
+
+csharp_indent_switch_labels = true
+
+csharp_preserve_single_line_blocks = true
+
+csharp_preserve_single_line_statements = false
+
+csharp_space_after_cast = false
+
+csharp_space_after_colon_in_inheritance_clause = true
+
+csharp_space_after_comma = true
+
+csharp_space_after_dot = false
+
+csharp_space_after_keywords_in_control_flow_statements = true
+
+csharp_space_after_semicolon_in_for_statement = true
+
+csharp_space_around_binary_operators = before_and_after
+
+csharp_space_around_declaration_statements = do_not_ignore
+
+csharp_space_before_colon_in_inheritance_clause = true
+
+csharp_space_before_comma = false
+
+csharp_space_before_dot = false
+
+csharp_space_before_open_square_brackets = false
+
+csharp_space_before_semicolon_in_for_statement = false
+
+csharp_space_between_empty_square_brackets = false
+
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
+
+csharp_space_between_method_call_name_and_opening_parenthesis = false
+
+csharp_space_between_method_call_parameter_list_parentheses = false
+
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+
+csharp_space_between_method_declaration_name_and_open_parenthesis = false
+
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+
+csharp_space_between_square_brackets = false
+
+# Styles
+# UpperCamelCase
+dotnet_naming_style.upper_camel_case_style.capitalization = pascal_case
+
+# lowerCamelCase
+dotnet_naming_style.lower_camel_case_style.capitalization = camel_case
+
+# IUpperCamelCase
+dotnet_naming_style.i_upper_camel_case_style.capitalization = pascal_case
+dotnet_naming_style.i_upper_camel_case_style.required_prefix = I
+
+# _lowerCamelCase
+dotnet_naming_style.underscore_lower_camel_case_style.capitalization = camel_case
+dotnet_naming_style.underscore_lower_camel_case_style.required_prefix = _
+
+# MethodAsync
+dotnet_naming_style.end_in_async_style.capitalization = pascal_case
+dotnet_naming_style.end_in_async_style.required_suffix = Async
+
+# ALL_UPPER_SNAKE_CASE
+dotnet_naming_style.all_upper_snake_case_style.capitalization = all_upper
+dotnet_naming_style.all_upper_snake_case_style.word_separator = _
+
+# Members
+dotnet_naming_rule.member_rule.severity = warning
+dotnet_naming_rule.member_rule.symbols = member_symbols
+dotnet_naming_rule.member_rule.style = upper_camel_case_style
+
+dotnet_naming_symbols.member_symbols.applicable_kinds = class,struct,enum,property,event,delegate
+
+# Constants
+dotnet_naming_rule.constant_rule.severity = warning
+dotnet_naming_rule.constant_rule.symbols = constant_symbols
+dotnet_naming_rule.constant_rule.style = upper_camel_case_style
+
+dotnet_naming_symbols.constant_symbols.applicable_kinds = field
+dotnet_naming_symbols.constant_symbols.required_modifiers = const
+
+# Interfaces
+dotnet_naming_rule.interface_rule.severity = warning
+dotnet_naming_rule.interface_rule.symbols = interface_symbols
+dotnet_naming_rule.interface_rule.style = i_upper_camel_case_style
+
+dotnet_naming_symbols.interface_symbols.applicable_kinds = interface
+
+# Async methods
+dotnet_naming_rule.async_method_rule.severity = warning
+dotnet_naming_rule.async_method_rule.symbols = async_method_symbols
+dotnet_naming_rule.async_method_rule.style = end_in_async_style
+
+dotnet_naming_symbols.async_method_symbols.applicable_kinds = method
+dotnet_naming_symbols.async_method_symbols.required_modifiers = async
+
+# Other methods
+dotnet_naming_rule.method_rule.severity = warning
+dotnet_naming_rule.method_rule.symbols = method_symbols
+dotnet_naming_rule.method_rule.style = upper_camel_case_style
+
+dotnet_naming_symbols.method_symbols.applicable_kinds = method
+
+# Private fields
+dotnet_naming_rule.private_field_rule.severity = warning
+dotnet_naming_rule.private_field_rule.symbols = private_field_symbols
+dotnet_naming_rule.private_field_rule.style = underscore_lower_camel_case_style
+
+dotnet_naming_symbols.private_field_symbols.applicable_kinds = field
+dotnet_naming_symbols.private_field_symbols.applicable_accessibilities = private
+
+# Public and protected fields
+dotnet_naming_rule.public_and_protected_field_rule.severity = warning
+dotnet_naming_rule.public_and_protected_field_rule.symbols = public_and_protected_field_symbols
+dotnet_naming_rule.public_and_protected_field_rule.style = upper_camel_case_style
+
+dotnet_naming_symbols.public_and_protected_field_symbols.applicable_kinds = field
+dotnet_naming_symbols.public_and_protected_field_symbols.applicable_accessibilities = public,protected
+
+# Parameters
+dotnet_naming_rule.parameter_rule.severity = warning
+dotnet_naming_rule.parameter_rule.symbols = parameter_rule_symbols
+dotnet_naming_rule.parameter_rule.style = lower_camel_case_style
+
+dotnet_naming_symbols.parameter_rule_symbols.applicable_kinds = parameter
