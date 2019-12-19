@@ -1,2 +1,2 @@
 # DbParametersBuilder
-Library for convert class to DbParameters 
+Library for converting classes to DbParameters
