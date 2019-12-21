@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using CoreLibrary;
 using DbParametersBuilder.Core;
 using DbParametersBuilder.Data;
+using Npgsql;
 
 namespace DbParametersBuilder {
     public class DbParametersBuilder<T> : IDbParametersBuilder<T> where T : class, new() {
@@ -27,7 +29,7 @@ namespace DbParametersBuilder {
         }
 
         #endregion
-        IParameters<DbParameter> IDbParametersBuilder<T>.BuildParameters() {
+        IEnumerable<DbParameter> IDbParametersBuilder<T>.BuildParameters() {
             return BuildParameters();
         }
 
@@ -70,8 +72,12 @@ namespace DbParametersBuilder {
             return tParam.Value;
         }
 
-        public virtual IParameters<DbParameter> BuildParameters() {
-            return new DbParametersDataCollection<T>(ParametersData.Values);
+        public virtual IEnumerable<DbParameter> BuildParameters() {
+            var parameters = ParametersData.Values.Select(item => item.Build(() => new NpgsqlParameter()));
+            if (BuilderSettings.SkipNullParameters) {
+                parameters = parameters.Where(x => x.Value != null);
+            }
+            return parameters;
         }
 
         public virtual void Dispose() {

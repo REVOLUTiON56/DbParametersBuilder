@@ -16,8 +16,8 @@ namespace DbParametersBuilderTests {
             _fixture = fixture;
         }
 
-        public static DbParameter GetDbParameter(IParameters<DbParameter> parameters, string name) {
-            return (NpgsqlParameter)parameters.GetParameters(DbParametersBuilderFixture.CreateNewParameter).FirstOrDefault(x => x.ParameterName == name);
+        public static DbParameter GetDbParameter(IEnumerable<DbParameter> parameters, string name) {
+            return (NpgsqlParameter)parameters.FirstOrDefault(x => x.ParameterName == name);
         }
 
         [Fact]

@@ -18,7 +18,7 @@ namespace DbParametersBuilderTests {
 
         public static readonly Func<DbParameter> CreateNewParameter = () => new NpgsqlParameter();
         public NpgsqlParameter GetNpgsqlParameter(string name = null) {
-            var parameters = Builder.BuildParameters().GetParameters(CreateNewParameter);
+            var parameters = Builder.BuildParameters();
             return (NpgsqlParameter)parameters?.FirstOrDefault(x => x.ParameterName == name);
         }
     }
