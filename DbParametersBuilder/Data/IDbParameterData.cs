@@ -1,6 +1,7 @@
 using System;
 using System.Data.Common;
 using DbParametersBuilder.Data.Shared;
+using DbParametersBuilder.Data.Shared.Interfaces;
 
 namespace DbParametersBuilder.Data {
 

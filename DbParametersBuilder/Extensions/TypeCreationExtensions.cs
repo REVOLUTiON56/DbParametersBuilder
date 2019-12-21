@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CoreLibrary;
 using NpgsqlTypes;
 
-namespace SqlCore.DLBase.FilterBuilder.Extensions {
+namespace DbParametersBuilder.Extensions {
     public static class TypesCreationExtensions {
         public static NpgsqlRange<T> ConvertToNpgsqlRange<T>(this Range<T> range) where T : IComparable<T> {
             return new NpgsqlRange<T>(range.LowerBound, range.LowerBoundType == Range.BoundTypes.Inclusive, range.LowerBoundType == Range.BoundTypes.Infinite,

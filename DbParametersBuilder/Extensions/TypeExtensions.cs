@@ -12,5 +12,13 @@ namespace DbParametersBuilder.Extensions {
 
             return null;
         }
+
+        public static bool IsNullableType(this Type type) {
+            if (!type.IsValueType)
+                return true; // ref-type
+            if (Nullable.GetUnderlyingType(type) != null)
+                return true; // Nullable<T>
+            return false; // value-type
+        }
     }
 }

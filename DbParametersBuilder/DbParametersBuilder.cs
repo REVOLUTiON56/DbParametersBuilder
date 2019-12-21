@@ -4,6 +4,7 @@ using System.Data.Common;
 using System.Linq.Expressions;
 using System.Reflection;
 using CoreLibrary;
+using DbParametersBuilder.Core;
 using DbParametersBuilder.Data;
 
 namespace DbParametersBuilder {
@@ -12,7 +13,8 @@ namespace DbParametersBuilder {
         protected readonly IDictionary<PropertyInfo, IDbParameterData> ParametersData;
         #region ctor
         public DbParametersBuilder() {
-
+            var builderFactory = BuilderSettings.BuilderFactory;
+            ParametersData = builderFactory.InitializeDbParametersData(ObjectType);
         }
 
         public DbParametersBuilder(T model) : this() {
@@ -29,7 +31,7 @@ namespace DbParametersBuilder {
             return BuildParameters();
         }
 
-        private IDbParameterData<TProperty> GetParameterFromExpression<TProperty>(Expression<Func<T, TProperty>> expression) {
+        private IDbParameterData<TProperty> GetParameterDataFromExpression<TProperty>(Expression<Func<T, TProperty>> expression) {
             if (!(expression.Body is MemberExpression memberSelectorExpression))
                 throw new InvalidOperationException();
 
@@ -45,17 +47,26 @@ namespace DbParametersBuilder {
             return tParam;
         }
 
+        public virtual void SetParametersFromModel(T model) {
+            if (model == null)
+                throw new ArgumentNullException(nameof(model));
+
+            foreach (var item in ParametersData) {
+                ParametersData[item.Key].Value = item.Key.GetValue(model);
+            }
+        }
+
         public virtual void SetParameterValue<TProperty>(Expression<Func<T, TProperty>> expression, TProperty value) {
-            var tParam = GetParameterFromExpression(expression);
+            var tParam = GetParameterDataFromExpression(expression);
             tParam.Value = value;
         }
 
         public virtual void SetParameterValue<TProperty>(Expression<Func<T, TProperty>> expression, Func<TProperty, TProperty> func) {
-            var tParam = GetParameterFromExpression(expression);
+            var tParam = GetParameterDataFromExpression(expression);
             tParam.Value = func(tParam.Value);
         }
-        public TProperty GetParameterValue<TProperty>(Expression<Func<T, TProperty>> expression) {
-            var tParam = GetParameterFromExpression(expression);
+        public virtual TProperty GetParameterValue<TProperty>(Expression<Func<T, TProperty>> expression) {
+            var tParam = GetParameterDataFromExpression(expression);
             return tParam.Value;
         }
 

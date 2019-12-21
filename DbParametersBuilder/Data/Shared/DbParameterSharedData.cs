@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using CoreLibrary;
 using DbParametersBuilder.Attributes;
+using DbParametersBuilder.Data.Converters;
 using DbParametersBuilder.Data.Shared.Interfaces;
 using NpgsqlTypes;
 
@@ -20,6 +21,7 @@ namespace DbParametersBuilder.Data.Shared {
         public T DefaultValue { get; protected set; }
         public Type PropertyType => typeof(T);
         public Type ActualType => Nullable.GetUnderlyingType(PropertyType) ?? PropertyType;
+        public IConverter<T> Converter { get; protected set; }
 
         protected DbParameterSharedData(PropertyInfo property) {
             PropertyInfo = property ?? throw new ArgumentNullException(nameof(property));
@@ -42,6 +44,14 @@ namespace DbParametersBuilder.Data.Shared {
             var typeAttribute = property.GetCustomAttribute<DbParameterTypeAttribute>();
             var defaultValueAttribute = property.GetCustomAttribute<DefaultValueAttribute>();
             var filterNameAttribute = property.GetCustomAttribute<FilterNameAttribute>();
+            var converterAttribute = property.GetCustomAttribute<ConverterAttribute>();
+
+            if (converterAttribute != null) {
+                Converter = Activator.CreateInstance(converterAttribute.Type.MakeGenericType(ActualType)) as IConverter<T>;
+            }
+            else {
+                Converter = ConvertersFactory.GetConverter<T>(ActualType);
+            }
 
             if (filterNameAttribute != null)
                 Filter = filterNameAttribute.FilterName;

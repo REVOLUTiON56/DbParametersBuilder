@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
 using CoreLibrary;
+using DbParametersBuilder.Core;
 using DbParametersBuilder.Data;
 
 namespace DbParametersBuilder {
@@ -13,11 +14,23 @@ namespace DbParametersBuilder {
         /// </summary>
         private readonly int _parametersToSkip = 0;
         public virtual IEnumerable<DbParameter> GetParameters(Func<DbParameter> createParameter) {
-            return _parametersData.Select(item => item.Build(createParameter));
+            var parameters = _parametersData.Select(item => item.Build(createParameter));
+
+            if (BuilderSettings.SkipNullParameters) {
+                parameters = parameters.Where(x => x.Value != null);
+            }
+
+            return parameters;
         }
 
         public virtual IEnumerable<DbParameter> GetFilterParameters(Func<DbParameter> createParameter) {
-            return _parametersData.Skip(_parametersToSkip).Select(item => item.Build(createParameter));
+            var parameters = _parametersData.Skip(_parametersToSkip).Select(item => item.Build(createParameter));
+
+            if (BuilderSettings.SkipNullParameters) {
+                parameters = parameters.Where(x => x.Value != null);
+            }
+
+            return parameters;
         }
 
         public DbParametersDataCollection(IEnumerable<IDbParameterData> parameters) {

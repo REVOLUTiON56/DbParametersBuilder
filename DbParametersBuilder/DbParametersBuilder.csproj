@@ -12,4 +12,8 @@
     <ProjectReference Include="$(SolutionDir)\CoreLibrary\CoreLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Parsers\" />
+  </ItemGroup>
+
 </Project>
